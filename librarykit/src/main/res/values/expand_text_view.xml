@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExpandTextView">
+        <attr name="hintLocate" format="enum">
+            <enum name="LEFT" value="0" />
+            <enum name="CENTER" value="1" />
+            <enum name="RIGHT" value="2" />
+            <enum name="FOLLOW" value="3" />
+        </attr>
+        <attr name="MaxLine" format="integer" />
+        <attr name="hintColor" format="reference|color" />
+        <attr name="showTipAfterExpand" format="boolean" />
+        <attr name="showTipBeforeCollapse" format="boolean" />
+        <attr name="tipClickable" format="boolean" />
+        <attr name="textCollapse" format="string" />
+        <attr name="textExpand" format="string" />
+    </declare-styleable>
+</resources>

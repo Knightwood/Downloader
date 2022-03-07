@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/active_indicator"
+        android:icon="@drawable/ic_active_download"
+        android:title="@string/active_indicator" />
+    <item
+        android:id="@+id/finish_indicator"
+        android:icon="@drawable/ic_finish_download"
+        android:title="@string/finish_indicator" />
+    <item
+        android:id="@+id/setting_indicator"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/setting_indicator" />
+
+</menu>

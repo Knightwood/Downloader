@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Downloader</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!--底部导航栏-->
+    <string name="active_indicator">下载中</string>
+    <string name="finish_indicator">完成</string>
+    <string name="setting_indicator">设置</string>
+    <string name="fab_add_download">新建下载</string>
+    <string name="download_advanced">高级选项</string>
+    <string name="download_description">对下载任务的描述</string>
+    <string name="download_pieces_number_title">分块数</string>
+    <string name="download_user_agent">UserAgent</string>
+    <string name="checksum">校验和</string>
+    <string name="add_dialog_checksum_description">MD5 和 SHA 256</string>
+    <string name="clipboard">剪贴板</string>
+    <string name="referer">Http Referer</string>
+    <string name="referer_description">自定义referer</string>
+    <string name="test">测试</string>
+    <string name="select">选择</string>
+    <string name="cancel">取消</string>
+    <string name="download">下载</string>
+</resources>

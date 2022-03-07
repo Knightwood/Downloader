@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/left_guide_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/right_guide_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/url_input_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="网址"
+                app:layout_constraintEnd_toEndOf="@id/right_guide_line"
+                app:layout_constraintStart_toEndOf="@id/left_guide_line"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/url_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/file_name_input_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="文件名称"
+                app:layout_constraintEnd_toEndOf="@id/right_guide_line"
+                app:layout_constraintStart_toStartOf="@id/left_guide_line"
+                app:layout_constraintTop_toBottomOf="@id/url_input_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/file_name_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/file_path_input_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="文件路径"
+                app:layout_constraintEnd_toEndOf="@id/right_guide_line"
+                app:layout_constraintStart_toStartOf="@id/left_guide_line"
+                app:layout_constraintTop_toBottomOf="@id/file_name_input_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/file_path_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/select_path_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:text="@string/select"
+                app:layout_constraintTop_toBottomOf="@id/file_path_input_layout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/right_guide_line" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.kiylx.downloader.ui.customview.ExpansionHeader
+            android:id="@+id/expansion_header"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:focusable="true"
+            android:padding="8dp"
+            app:expansion_expanded="false"
+            app:expansion_text="@string/download_advanced"
+            app:expansion_textAppearance="@style/TextAppearance.Material3.HeadlineMedium" />
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/advancedLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:el_duration="5"
+            app:el_expanded="false"
+            app:el_parallax="0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:minWidth="@dimen/min_width_dialog">
+                <!--文件描述-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:hint="@string/download_description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text|textNoSuggestions"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--分块数标题-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/pieces_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/download_pieces_number_title"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_description" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:constraint_referenced_ids="pieces_number_select,pieces_number_value" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/pieces_number_select"
+                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:max="8"
+                    app:layout_constraintEnd_toStartOf="@id/pieces_number_value"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pieces_number" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pieces_number_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:inputType="numberDecimal"
+                    app:layout_constraintBottom_toBottomOf="@id/pieces_number_select"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/pieces_number_select"
+                    app:layout_constraintTop_toTopOf="@id/pieces_number_select" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/user_agent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/download_user_agent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pieces_number_select">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_user_agent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add_user_agent"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_add"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_agent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_checksum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/checksum"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_user_agent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/checksum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text|textNoSuggestions" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_referer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/referer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_checksum">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/referer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text|textNoSuggestions" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+        <!--测试网址是否可用-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="bottom">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/test_result_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_alignBaseline="@+id/test_url_button"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/test_url_button"
+                tools:text="可以下载" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/test_url_button"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:text="@string/test" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_download_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/test_url_button"
+                android:layout_marginTop="16dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:text="@string/download" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_download_button"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_alignBottom="@id/add_download_button"
+                android:layout_toStartOf="@id/add_download_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_gravity="end"
+                android:text="@string/cancel" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

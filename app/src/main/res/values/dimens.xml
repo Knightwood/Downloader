@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">32dp</dimen>
+    <dimen name="toolbar_elevation">8dp</dimen>
+    <dimen name="bottomNavbar_elevation">16dp</dimen>
+    <dimen name="min_width_dialog">300dp</dimen>
+</resources>

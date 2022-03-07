@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="toolbarBackground" format="color" />
+
+
+
+    <attr name="textColor_content1" format="color" />
+    <attr name="textColor_content2" format="color" />
+    <attr name="textColor_content3" format="color" />
+    <attr name="textColor_title1" format="color"/>
+    <attr name="textColor_title2" format="color"/>
+    <attr name="textColor_title3" format="color"/>
+
+    <declare-styleable name="ExpansionHeader">
+        <attr name="expansion_text" format="string" />
+        <attr name="expansion_expanded" format="boolean" />
+        <attr name="expansion_textAppearance" format="reference" />
+    </declare-styleable>
+</resources>

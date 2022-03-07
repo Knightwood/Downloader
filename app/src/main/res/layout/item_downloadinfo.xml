@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!--每一个下载条目的样式-->
+    <ImageButton
+        android:id="@+id/start_pause_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/begin_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/ic_play_arrow" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/begin_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="56dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="56dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/download_file_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@id/download_progress"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintStart_toStartOf="@id/begin_guideline"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:text="下载文件.zip" />
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/download_progress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:min="0"
+        app:layout_constraintBottom_toTopOf="@id/download_current_bytes"
+        app:layout_constraintEnd_toEndOf="@id/download_file_name"
+        app:layout_constraintStart_toStartOf="@id/download_file_name"
+        app:layout_constraintTop_toBottomOf="@id/download_file_name"
+        tools:max="150"
+        tools:min="0"
+        tools:progress="15" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/download_current_bytes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/download_file_size_sep"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/begin_guideline"
+        app:layout_constraintTop_toBottomOf="@id/download_progress"
+        tools:text="256" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/download_file_size_sep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/download_current_bytes"
+        app:layout_constraintEnd_toStartOf="@id/download_total_size"
+        app:layout_constraintStart_toEndOf="@id/download_current_bytes"
+        app:layout_constraintTop_toTopOf="@id/download_current_bytes"
+        tools:text="/" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/download_total_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/download_current_bytes"
+        app:layout_constraintStart_toEndOf="@id/download_file_size_sep"
+        app:layout_constraintTop_toTopOf="@id/download_current_bytes"
+        tools:text="30000" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/download_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toBottomOf="@id/download_current_bytes"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintTop_toTopOf="@id/download_current_bytes"
+        tools:text="12M/s" />
+
+    <ImageButton
+        android:id="@+id/download_control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/end_guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/ic_baseline_close_24" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
