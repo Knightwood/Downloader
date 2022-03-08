@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kiylx.download_module.view.SimpleDownloadInfo
 import com.kiylx.downloader.R
-import com.kiylx.downloader.download_control.DownloadDelegate.Companion.getDownloads
-import com.kiylx.downloader.ui.ViewHolders
+import com.kiylx.downloader.core.download_control.DownloadDelegate.Companion.getDownloads
+import com.kiylx.downloader.kits.ViewHolders
 import com.kiylx.librarykit.tools.adapter.SimpleAdapter
 import com.kiylx.librarykit.tools.adapter.SimpleHolder
 

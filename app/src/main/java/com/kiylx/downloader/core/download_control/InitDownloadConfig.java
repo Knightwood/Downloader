@@ -1,17 +1,23 @@
-package com.kiylx.downloader.download_control;
+package com.kiylx.downloader.core.download_control;
 
 import com.kiylx.download_module.Context;
 import com.kiylx.download_module.Downloads;
-import com.kiylx.download_module.lib_core.model.DownloadInfo;
 import com.kiylx.download_module.view.ViewsCenter;
-import com.kiylx.download_module.viewTest.TextConsel;
+import com.kiylx.downloader.core.store.FileKitImpl;
+import com.kiylx.downloader.core.store.RepoImpl;
+import com.kiylx.downloader.core.store.SystemCallImpl;
+import com.kiylx.librarykit.tools.live_data_bus.core.BusCore;
 
+/**
+ * 配置所有下载相关的工具类，它跟随application生命周期，所有databus也在此处被引用
+ */
 public class InitDownloadConfig {
     public Context.ContextConfigs contextConfigs;
     public Downloads downloads;
     public Context context;
     public ViewsCenter viewsCenter;
     public DownloadInfoSources sources;
+    public final BusCore dataBus=BusCore.getInstance();
 
     private InitDownloadConfig() {
         initContext();
@@ -20,6 +26,9 @@ public class InitDownloadConfig {
     private void initContext() {
         contextConfigs = new Context.ContextConfigs();
         contextConfigs.setThreadNum(8);
+        contextConfigs.setFileKitClazz(FileKitImpl.class);
+        contextConfigs.setRepoClazz(RepoImpl.class);
+        contextConfigs.setSysCallClazz(SystemCallImpl.class);
 
         downloads = Downloads.Companion.downloadsInstance(contextConfigs);
 

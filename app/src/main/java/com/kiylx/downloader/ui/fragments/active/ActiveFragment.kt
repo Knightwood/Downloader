@@ -2,21 +2,24 @@ package com.kiylx.downloader.ui.fragments.active
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.kiylx.download_module.view.SimpleDownloadInfo
+import com.kiylx.downloader.kits.ConstRes.Companion.downloadDetailChannelName
 import com.kiylx.downloader.R
 import com.kiylx.downloader.databinding.FragmentActiveBinding
-import com.kiylx.downloader.ui.Differ
+import com.kiylx.downloader.core.download_control.DownloadDelegate.Companion.getDefaultEventBus
+import com.kiylx.downloader.kits.Differ
+import com.kiylx.downloader.ui.activitys.DownloadTaskDetailActivity
 import com.kiylx.downloader.ui.activitys.adddownload.AddDownloadActivity
 import com.kiylx.downloader.ui.fragments.FragmentViewModel
 import com.kiylx.librarykit.tools.adapter.SimpleAdapter
+import com.kiylx.toolslib.getViewModel
 
 class ActiveFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -26,7 +29,7 @@ class ActiveFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FragmentViewModel::class.java)
+        viewModel = getViewModel(activity, FragmentViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -45,21 +48,47 @@ class ActiveFragment : Fragment() {
                     when (it.id) {
                         R.id.download_control -> {
                             //弹出菜单
+                            val popMenu = PopupMenu(activity, v)
+                            popMenu.apply {
+                                menuInflater.inflate(R.menu.download_info_more, menu)
+                                setOnMenuItemClickListener { item ->
+                                    item?.let { it ->
+                                        when (it.itemId) {
+                                            R.id.cancel_download -> {}
+                                            R.id.delete -> {}
+                                            R.id.share_download_file -> {}
+                                            R.id.share_download_url -> {}
+                                        }
+                                    }
+                                    true
+                                }
+                            }
+                            popMenu.show()
                         }
-                        else -> {
-                            //打开详情
+                        else -> {//打开详情
+                            val id = adapter.dataLists[pos].id
+                            val info = viewModel.getInfo(id)
+                            info?.let { info_ ->
+                                getDefaultEventBus()
+                                    .get<SimpleDownloadInfo>(downloadDetailChannelName)
+                                    .post(info_)
+                                startActivity(
+                                    Intent(
+                                        activity,
+                                        DownloadTaskDetailActivity::class.java
+                                    )
+                                )
+                            }
                         }
-
                     }
                 }
             }
-
         })
         fab.setOnClickListener {
             /*val f = AddDownloadDialog()
             val fm: FragmentManager = this.parentFragmentManager
             f.show(fm, AddDownloadDialog)*/
-            startActivity(Intent(requireContext(), AddDownloadActivity::class.java))
+            startActivity(Intent(activity, AddDownloadActivity::class.java))
         }
         return root.root
     }
@@ -70,7 +99,7 @@ class ActiveFragment : Fragment() {
     }
 
     private fun observerInfos() {
-        viewModel.getActiveList().observe(this) { newList ->
+        viewModel.getActiveWaitList().observe(this) { newList ->
             //同时下载最多也就5条数据，数据量小，此处就不开协程处理差异了
             val oldList = adapter.dataLists
             val diffResult: DiffUtil.DiffResult =
@@ -81,8 +110,6 @@ class ActiveFragment : Fragment() {
     }
 
     companion object {
-        const val AddDownloadDialog = "AddDownloadDialog_3231"
-
         @JvmStatic
         fun newInstance() =
             ActiveFragment()

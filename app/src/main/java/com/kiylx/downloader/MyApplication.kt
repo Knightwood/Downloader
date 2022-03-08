@@ -1,9 +1,7 @@
 package com.kiylx.downloader
 
 import android.app.Application
-import android.content.Context
-import com.kiylx.download_module.Downloads
-import com.kiylx.downloader.download_control.InitDownloadConfig
+import com.kiylx.downloader.core.download_control.InitDownloadConfig
 
 class MyApplication : Application() {
 

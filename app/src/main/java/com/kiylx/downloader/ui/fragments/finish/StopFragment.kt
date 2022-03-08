@@ -5,15 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kiylx.downloader.R
 import com.kiylx.downloader.databinding.FragmentStopBinding
-import com.kiylx.downloader.ui.Differ
+import com.kiylx.downloader.kits.Differ
 import com.kiylx.downloader.ui.fragments.FragmentViewModel
 import com.kiylx.librarykit.tools.adapter.SimpleAdapter
+import com.kiylx.toolslib.getViewModel
 
 class StopFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -22,7 +22,7 @@ class StopFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FragmentViewModel::class.java)
+        viewModel= getViewModel(activity, FragmentViewModel::class.java)
     }
 
     override fun onCreateView(

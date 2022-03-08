@@ -3,10 +3,7 @@ package com.kiylx.downloader.ui.fragments.finish
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kiylx.download_module.view.SimpleDownloadInfo
-import com.kiylx.downloader.R
-import com.kiylx.downloader.download_control.DownloadDelegate
-import com.kiylx.downloader.ui.ViewHolders
-import com.kiylx.downloader.ui.fragments.active.InfoViewHolder
+import com.kiylx.downloader.kits.ViewHolders
 import com.kiylx.librarykit.tools.adapter.SimpleAdapter
 import com.kiylx.librarykit.tools.adapter.SimpleHolder
 

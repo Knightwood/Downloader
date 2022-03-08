@@ -84,7 +84,7 @@ public class LiveDataMod<T> extends MutableLiveData<T> {
     }
     /**
      *
-     * @param observer RealObserver,也就是androidx.lifecycle.Observer;
+     * @param realObserver RealObserver,也就是androidx.lifecycle.Observer;
      */
     private ObserverAgency<? super T> get(@NonNull Observer<? super T> realObserver) {
         for (Map.Entry<UUID, ObserverAgency<? super T>> entry : this.mObservers.entrySet()) {

@@ -34,7 +34,7 @@ public class BusCore {
 
     private static enum Singleton {
         INSTANCE;
-        private BusCore classInstance;
+        private final BusCore classInstance;
 
         Singleton() {
             classInstance = new BusCore();

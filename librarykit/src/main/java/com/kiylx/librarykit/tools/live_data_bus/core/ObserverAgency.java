@@ -1,5 +1,7 @@
 package com.kiylx.librarykit.tools.live_data_bus.core;
 
+import static com.kiylx.librarykit.tools.live_data_bus.core.LiveDataMod.START_VERSION;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
@@ -7,8 +9,6 @@ import androidx.lifecycle.Observer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
-
-import static com.crystal.aplayer.module_base.tools.live_data_bus.core.LiveDataMod.START_VERSION;
 
 /**
  * 创建者 kiylx

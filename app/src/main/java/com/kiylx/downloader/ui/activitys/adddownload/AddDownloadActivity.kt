@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.kiylx.download_module.lib_core.interfaces.ConnectionListener
 import com.kiylx.download_module.lib_core.network.TaskDataReceive
 import com.kiylx.downloader.databinding.ActivityAddDownloadBinding
-import com.kiylx.downloader.download_control.DownloadDelegate.Companion.getDownloads
+import com.kiylx.downloader.core.download_control.DownloadDelegate.Companion.getDownloads
 import com.kiylx.toolslib.MyTextWatcher
 import java.io.IOException
 import java.net.HttpURLConnection.*
@@ -27,7 +27,7 @@ class AddDownloadActivity : AppCompatActivity() {
         initLayoutView()
     }
 
-    fun initLayoutView() {
+    private fun initLayoutView() {
         activityBinding.expansionHeader.setOnClickListener { view: View? ->
             activityBinding.advancedLayout.toggle()
             activityBinding.expansionHeader.toggleExpand()
@@ -105,15 +105,15 @@ class AddDownloadActivity : AppCompatActivity() {
                     code: Int,
                     message: String?
                 ) {
-                    var message:String=""
-                    message = when (code) {
+                    var resultMsg=" "
+                    resultMsg = when (code) {
                         HTTP_OK -> "OK"
                         HTTP_PRECON_FAILED -> "Precondition failed"
                         HTTP_UNAVAILABLE -> "HTTP_UNAVAILABLE"
                         HTTP_INTERNAL_ERROR -> "HTTP_INTERNAL_ERROR"
                         else -> " UnKnowError"
                     }
-                    textView.text=message
+                    textView.text=resultMsg
                 }
                 override fun onMovedPermanently(httpCode: Int, newUrl: String?) {}
                 override fun onIOException(e: IOException?) {}

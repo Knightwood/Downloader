@@ -1,7 +1,7 @@
-package com.kiylx.downloader.download_control
+package com.kiylx.downloader.core.download_control
 
 import com.kiylx.download_module.Downloads
-import com.kiylx.download_module.lib_core.model.DownloadInfo
+import com.kiylx.librarykit.tools.live_data_bus.core.BusCore
 
 class DownloadDelegate {
     companion object {
@@ -15,6 +15,10 @@ class DownloadDelegate {
 
         fun getInfoSources(): DownloadInfoSources {
             return InitDownloadConfig.getInstance().sources
+        }
+
+        fun getDefaultEventBus():BusCore{
+            return InitDownloadConfig.getInstance().dataBus
         }
     }
 }
