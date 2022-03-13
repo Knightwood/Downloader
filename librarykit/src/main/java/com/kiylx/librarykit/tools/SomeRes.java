@@ -1,7 +1,5 @@
 package com.kiylx.librarykit.tools;
 
-import com.crystal.aplayer.module_base.common.util.GlobalUtil;
-
 /**
  * 创建者 kiylx
  * 创建时间 2020/9/9 22:47
@@ -9,7 +7,6 @@ import com.crystal.aplayer.module_base.common.util.GlobalUtil;
  * 描述：
  */
 public class SomeRes {
-    public static String preference_conf_1 = GlobalUtil.INSTANCE.getAppPackage() + "_preferences";//sharedPreference的名称
     public static int downloadThreadNum = 8;//默认下载线程数
     public static int downloadLimit =3;
 

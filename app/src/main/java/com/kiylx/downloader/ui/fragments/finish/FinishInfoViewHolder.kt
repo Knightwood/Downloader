@@ -21,7 +21,7 @@ class FinishInfoViewHolder(item: View, holderInfo: HolderInfo = ViewHolders.UNKN
 
     fun bindData(data: SimpleDownloadInfo) {
         data.run {
-            titleView.text = name
+            titleView.text = fileName
             urlView.text=url
             totalBytesView.text = fileSize.toString()
             msgView.text=finalMsg

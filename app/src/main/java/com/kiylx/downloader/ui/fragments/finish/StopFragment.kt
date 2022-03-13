@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +13,8 @@ import com.kiylx.downloader.R
 import com.kiylx.downloader.databinding.FragmentStopBinding
 import com.kiylx.downloader.kits.Differ
 import com.kiylx.downloader.ui.fragments.FragmentViewModel
-import com.kiylx.librarykit.tools.adapter.SimpleAdapter
-import com.kiylx.toolslib.getViewModel
+import com.kiylx.librarykit.tools.adapter.MyClickListener
+import com.kiylx.librarykit.toolslib.getViewModel
 
 class StopFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -35,12 +36,28 @@ class StopFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        adapter.setMyClickListener(object : SimpleAdapter.MyClickListener {
+        adapter.setMyClickListener(object : MyClickListener {
             override fun onClick(v: View?, pos: Int) {
                 v?.let {
                     when(it.id){
                         R.id.info_more->{
                             //打开菜单
+                            val popMenu = PopupMenu(activity, v)
+                            popMenu.apply {
+                                menuInflater.inflate(R.menu.download_info_more, menu)
+                                setOnMenuItemClickListener { item ->
+                                    item?.let { it ->
+                                        when (it.itemId) {
+                                            R.id.cancel_download -> {}
+                                            R.id.delete -> {}
+                                            R.id.share_download_file -> {}
+                                            R.id.copy_download_url -> {}
+                                        }
+                                    }
+                                    true
+                                }
+                            }
+                            popMenu.show()
                         }
                     }
                 }
@@ -59,7 +76,7 @@ class StopFragment : Fragment() {
             val oldList = adapter.dataLists
             val diffResult: DiffUtil.DiffResult =
                 DiffUtil.calculateDiff(Differ(oldList, newList), true)
-            adapter.dataLists = newList
+            adapter.dataLists = newList.toMutableList()
             diffResult.dispatchUpdatesTo(adapter)
         }
     }

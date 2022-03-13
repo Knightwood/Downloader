@@ -7,7 +7,7 @@
         android:id="@+id/share_download_file"
         android:title="@string/share_download_file" />
     <item
-        android:id="@+id/share_download_url"
+        android:id="@+id/copy_download_url"
         android:title="@string/share_download_url" />
     <item
         android:id="@+id/delete"

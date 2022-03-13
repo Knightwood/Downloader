@@ -4,8 +4,8 @@ import androidx.recyclerview.widget.DiffUtil.Callback
 import com.kiylx.download_module.view.SimpleDownloadInfo
 
 class Differ(
-    private var oldList: MutableList<SimpleDownloadInfo> = mutableListOf(),
-    private var newList: MutableList<SimpleDownloadInfo> = mutableListOf()
+    private var oldList: List<SimpleDownloadInfo> = mutableListOf(),
+    private var newList: List<SimpleDownloadInfo> = mutableListOf()
 ) : Callback() {
 
     override fun getOldListSize(): Int {
@@ -19,7 +19,7 @@ class Differ(
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val oldData: SimpleDownloadInfo = oldList[oldItemPosition]
         val newData: SimpleDownloadInfo = newList[newItemPosition]
-        return oldData.id == newData.id
+        return oldData.uuid == newData.uuid
     }
 
     //每次更新，数据源会产生不同的list,

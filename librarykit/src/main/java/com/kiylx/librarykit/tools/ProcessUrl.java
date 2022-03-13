@@ -3,7 +3,7 @@ package com.kiylx.librarykit.tools;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.crystal.aplayer.module_base.tools.preferences.PreferenceTools;
+import com.kiylx.librarykit.tools.preferences.PreferenceTools;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

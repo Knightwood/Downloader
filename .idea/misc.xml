@@ -7,13 +7,15 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1705" />
         <entry key="app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1705" />
+        <entry key="app/src/main/res/drawable/item_bg.xml" value="0.1775" />
+        <entry key="app/src/main/res/drawable/item_by.xml" value="0.1775" />
         <entry key="app/src/main/res/layout/activity_add_download.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/dialog_add_download.xml" value="0.33" />
         <entry key="app/src/main/res/layout/expansion_header.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/fragment_active.xml" value="0.2078804347826087" />
         <entry key="app/src/main/res/layout/fragment_stop.xml" value="0.2078804347826087" />
-        <entry key="app/src/main/res/layout/item_downloadinfo.xml" value="0.3453125" />
+        <entry key="app/src/main/res/layout/item_downloadinfo.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_file_info.xml" value="0.33" />
         <entry key="app/src/main/res/layout/jkl.xml" value="0.3453125" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.32592592592592595" />

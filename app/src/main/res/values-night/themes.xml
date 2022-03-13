@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
 
         <item name="toolbarBackground">@color/black</item>
-
+        <item name="downloadInfoItem">@style/DownloadInfoItemStyle</item>
     </style>
 
 </resources>

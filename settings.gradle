@@ -12,10 +12,18 @@ dependencyResolutionManagement {
         mavenCentral()
         maven {
             url 'https://jitpack.io'
-            credentials { username jitpackToken }
         }
     }
 }
 rootProject.name = "Downloader"
 include ':app'
 include ':librarykit'
+
+static def jitpackToken() {
+    Properties properties = new Properties()
+    InputStream inputStream = new FileInputStream('local.properties')
+    properties.load(inputStream)
+    def token=properties.getProperty("jitpackToken1")
+    println(token)
+    return token
+}

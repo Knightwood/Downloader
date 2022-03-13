@@ -4,7 +4,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.kiylx.download_module.lib_core.interfaces.DownloadResultListener
 import com.kiylx.download_module.view.SimpleDownloadInfo
-
+@Deprecated("outDated")
 class DownloadInfoSources : DownloadResultListener {
     val activeInfos: MutableLiveData<MutableList<SimpleDownloadInfo>> = MutableLiveData()
     val waitInfos: MutableLiveData<MutableList<SimpleDownloadInfo>> = MutableLiveData()

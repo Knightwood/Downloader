@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    style="@style/DownloadInfoItemStyle">
+
     <!--每一个下载条目的样式-->
     <ImageButton
         android:id="@+id/start_pause_button"
@@ -44,7 +46,6 @@
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/begin_guideline"
         app:layout_constraintTop_toTopOf="parent"
-
         tools:text="下载文件.zip" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
@@ -117,7 +118,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/end_guideline"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@drawable/ic_baseline_close_24" />
+        tools:background="@drawable/ic_baseline_more_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -116,7 +116,7 @@ public class Channel<T> implements Action<T> {
     }
 
     @Override
-    public void observe(@NonNull LifecycleOwner owner, @NonNull OstensibleObserver<T> ostensibleObserver) {
+    public void observeChannel(@NonNull LifecycleOwner owner, @NonNull OstensibleObserver<T> ostensibleObserver) {
         ostensibleObserver.config().setSticky(false);
         observerInternal(owner, ostensibleObserver);
     }

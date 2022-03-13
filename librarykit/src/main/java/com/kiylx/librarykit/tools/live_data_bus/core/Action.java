@@ -75,7 +75,7 @@ public interface Action<T> {
      * @param owner    LifecycleOwner
      * @param observer 观察者
      */
-    void observe(@NonNull LifecycleOwner owner, @NonNull OstensibleObserver<T> ostensibleObserver);
+    void observeChannel(@NonNull LifecycleOwner owner, @NonNull OstensibleObserver<T> ostensibleObserver);
 
     /**
      * 注册一个Observer，生命周期感知，自动取消订阅

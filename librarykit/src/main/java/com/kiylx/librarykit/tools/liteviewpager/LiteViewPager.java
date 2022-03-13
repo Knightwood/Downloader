@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import com.crystal.aplayer.module_base.tools.LogUtil;
+import com.kiylx.librarykit.tools.LogUtil;
 
 
 /**

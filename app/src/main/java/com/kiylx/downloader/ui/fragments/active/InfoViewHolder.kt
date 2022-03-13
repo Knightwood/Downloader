@@ -9,7 +9,7 @@ import com.kiylx.downloader.R
 import com.kiylx.downloader.kits.ViewHolders
 import com.kiylx.librarykit.tools.adapter.HolderInfo
 import com.kiylx.librarykit.tools.adapter.SimpleHolder
-import com.kiylx.toolslib.caclProgress
+import com.kiylx.librarykit.toolslib.caclProgress
 
 class InfoViewHolder(item: View, holderInfo: HolderInfo = ViewHolders.UNKNOWN) :
     SimpleHolder(item, holderInfo) {
@@ -25,9 +25,10 @@ class InfoViewHolder(item: View, holderInfo: HolderInfo = ViewHolders.UNKNOWN) :
 
     fun bindData(data: SimpleDownloadInfo) {
         data.run {
-            titleView.text = name
-            progressBar.progress = caclProgress(currentLength, fileSize)
-            currentBytesView.text = currentLength.toString()
+            val currentSize=currentLength
+            titleView.text = fileName
+            progressBar.progress = caclProgress(currentSize, fileSize)
+            currentBytesView.text = currentSize.toString()
             totalBytesView.text = fileSize.toString()
             speedView.text = speed.toString()
         }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!--theme中使用-->
     <attr name="toolbarBackground" format="color" />
-
+    <attr name="downloadInfoItem" format="reference"/>
 
 
     <attr name="textColor_content1" format="color" />
@@ -17,4 +17,5 @@
         <attr name="expansion_expanded" format="boolean" />
         <attr name="expansion_textAppearance" format="reference" />
     </declare-styleable>
+
 </resources>

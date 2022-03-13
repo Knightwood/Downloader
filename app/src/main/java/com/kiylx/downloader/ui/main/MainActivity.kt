@@ -10,8 +10,8 @@ import com.kiylx.downloader.databinding.ActivityMainBinding
 import com.kiylx.downloader.ui.fragments.active.ActiveFragment
 import com.kiylx.downloader.ui.fragments.finish.StopFragment
 import com.kiylx.downloader.ui.fragments.setting.SettingsFragment
-import com.kiylx.toolslib.nav_tool.BottomNavContainer2
-import com.kiylx.toolslib.nav_tool.FragmentFactory
+import com.kiylx.librarykit.toolslib.nav_tool.BottomNavContainer2
+import com.kiylx.librarykit.toolslib.nav_tool.FragmentFactory
 import java.util.*
 
 class MainActivity : AppCompatActivity() {

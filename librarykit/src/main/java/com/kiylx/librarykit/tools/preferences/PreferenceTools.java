@@ -4,10 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
-import com.crystal.aplayer.module_base.tools.SomeRes;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,7 +20,7 @@ import java.util.List;
  */
 public class PreferenceTools {
 
-    private static String PREFERENCE_NAME = SomeRes.preference_conf_1;
+    private static String PREFERENCE_NAME = "preference_conf_15625136546";
 
     /**
      * 清空数据
@@ -479,11 +475,8 @@ public class PreferenceTools {
     /**
      * 保存List<Object>
      *
-     * @param context
-     * @param key
-     * @param datalist
      */
-    public <T> void putListBean(Context context, String key, List<T> datalist) {
+    /*public <T> void putListBean(Context context, String key, List<T> datalist) {
         SharedPreferences.Editor edit = context.getSharedPreferences(
                 PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
         if (null == datalist || datalist.size() <= 0) {
@@ -494,16 +487,12 @@ public class PreferenceTools {
         String strJson = gson.toJson(datalist);
         edit.putString(key, strJson);
         edit.commit();
-    }
+    }*/
 
     /**
      * 获取List<Object>
-     *
-     * @param context
-     * @param key
-     * @return listBean
      */
-    public <T> List<T> getListBean(Context context, String key) {
+/*    public <T> List<T> getListBean(Context context, String key) {
         SharedPreferences sp = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         List<T> dataList = new ArrayList<T>();
         String strJson = sp.getString(key, null);
@@ -514,7 +503,7 @@ public class PreferenceTools {
         dataList = gson.fromJson(strJson, new TypeToken<List<T>>() {
         }.getType());
         return dataList;
-    }
+    }*/
 
     /**
      * 存放实体类以及任意类型
@@ -523,13 +512,13 @@ public class PreferenceTools {
      * @param key
      * @param obj
      */
-    public static void saveBean(Context context, String key,
+    /*public static void saveBean(Context context, String key,
                                 Object obj) {
         SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
         Gson gson = new Gson();
         String objString = gson.toJson(obj);
         editor.putString(key, objString).commit();
-    }
+    }*/
 
     /**
      * @param context
@@ -537,12 +526,12 @@ public class PreferenceTools {
      * @param clazz   这里传入一个类就是我们所需要的实体类(obj)
      * @return 返回我们封装好的该实体类(obj)
      */
-    public static <T> T getBean(Context context, String key,
+  /*  public static <T> T getBean(Context context, String key,
                                 Class<T> clazz) {
         //从sharedPreference中获取key的preference
         String objString = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).getString(key, "");
         //gson
         Gson gson = new Gson();
         return gson.fromJson(objString, clazz);
-    }
+    }*/
 }

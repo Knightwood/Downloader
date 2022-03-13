@@ -6,19 +6,15 @@ import com.kiylx.librarykit.tools.live_data_bus.core.BusCore
 class DownloadDelegate {
     companion object {
         fun getDownloads(): Downloads {
-            return InitDownloadConfig.getInstance().downloads
+            return InitConfigs.get().downloads
         }
 
-        fun getDownloadConfig(): InitDownloadConfig {
-            return InitDownloadConfig.getInstance()
-        }
-
-        fun getInfoSources(): DownloadInfoSources {
-            return InitDownloadConfig.getInstance().sources
+        fun getDownloadConfig(): InitConfigs {
+            return InitConfigs.get()
         }
 
         fun getDefaultEventBus():BusCore{
-            return InitDownloadConfig.getInstance().dataBus
+            return InitConfigs.get().dataBus
         }
     }
 }

@@ -8,6 +8,7 @@ import com.kiylx.downloader.core.download_control.DownloadDelegate.Companion.get
 import com.kiylx.downloader.kits.ViewHolders
 import com.kiylx.librarykit.tools.adapter.SimpleAdapter
 import com.kiylx.librarykit.tools.adapter.SimpleHolder
+import java.util.*
 
 
 class InfoAdapter(var dataLists: MutableList<SimpleDownloadInfo>) :
@@ -33,7 +34,7 @@ class InfoAdapter(var dataLists: MutableList<SimpleDownloadInfo>) :
                 val data=dataLists[pos]
                 when(it.id){
                     R.id.start_pause_button->{
-                        data.id?.let { uuid -> getDownloads().pauseDownload(uuid) }
+                        data.uuid?.let { it1 -> getDownloads().pauseDownload(it1) }
                     }
                 }
                 myClick?.onClick(it,pos)//点击事件向外传递

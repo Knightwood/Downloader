@@ -10,7 +10,8 @@ import com.kiylx.download_module.lib_core.interfaces.ConnectionListener
 import com.kiylx.download_module.lib_core.network.TaskDataReceive
 import com.kiylx.downloader.databinding.ActivityAddDownloadBinding
 import com.kiylx.downloader.core.download_control.DownloadDelegate.Companion.getDownloads
-import com.kiylx.toolslib.MyTextWatcher
+import com.kiylx.downloader.kits.buildRequest
+import com.kiylx.librarykit.toolslib.MyTextWatcher
 import java.io.IOException
 import java.net.HttpURLConnection.*
 
@@ -99,7 +100,7 @@ class AddDownloadActivity : AppCompatActivity() {
         activityBinding.testUrlButton.setOnClickListener {
             val textView=activityBinding.testResultText
 
-            TaskDataReceive.testConnect(viewModel.downloadInfo,object: ConnectionListener {
+            TaskDataReceive.testConnect(viewModel.downloadInfo.buildRequest(),object: ConnectionListener {
                 override fun onResponseHandle(
                     response: okhttp3.Response?,
                     code: Int,

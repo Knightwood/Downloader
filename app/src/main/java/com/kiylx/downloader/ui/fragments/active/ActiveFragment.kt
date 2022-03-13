@@ -2,24 +2,31 @@ package com.kiylx.downloader.ui.fragments.active
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kiylx.download_module.view.SimpleDownloadInfo
-import com.kiylx.downloader.kits.ConstRes.Companion.downloadDetailChannelName
 import com.kiylx.downloader.R
-import com.kiylx.downloader.databinding.FragmentActiveBinding
 import com.kiylx.downloader.core.download_control.DownloadDelegate.Companion.getDefaultEventBus
+import com.kiylx.downloader.databinding.FragmentActiveBinding
+import com.kiylx.downloader.kits.ConstRes.Companion.downloadDetailChannelName
 import com.kiylx.downloader.kits.Differ
 import com.kiylx.downloader.ui.activitys.DownloadTaskDetailActivity
 import com.kiylx.downloader.ui.activitys.adddownload.AddDownloadActivity
 import com.kiylx.downloader.ui.fragments.FragmentViewModel
-import com.kiylx.librarykit.tools.adapter.SimpleAdapter
-import com.kiylx.toolslib.getViewModel
+import com.kiylx.librarykit.tools.adapter.MyClickListener
+import com.kiylx.librarykit.toolslib.getViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import okhttp3.internal.wait
+import java.util.*
 
 class ActiveFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -42,22 +49,31 @@ class ActiveFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        adapter.setMyClickListener(object : SimpleAdapter.MyClickListener {
+        adapter.setMyClickListener(object : MyClickListener {
             override fun onClick(v: View?, pos: Int) {
                 v?.let {
                     when (it.id) {
                         R.id.download_control -> {
                             //弹出菜单
-                            val popMenu = PopupMenu(activity, v)
-                            popMenu.apply {
+                            val popMenu = PopupMenu(activity, v).apply {
                                 menuInflater.inflate(R.menu.download_info_more, menu)
                                 setOnMenuItemClickListener { item ->
+                                    val data = adapter.dataLists[pos]
                                     item?.let { it ->
                                         when (it.itemId) {
-                                            R.id.cancel_download -> {}
-                                            R.id.delete -> {}
-                                            R.id.share_download_file -> {}
-                                            R.id.share_download_url -> {}
+                                            R.id.cancel_download -> {
+                                                viewModel.cancelDownload(data)
+                                            }
+                                            R.id.delete -> {
+                                                viewModel.deleteDownload(data)
+                                            }
+                                            R.id.share_download_file -> {
+                                                viewModel.shareDownloadedFile(data)
+                                            }
+                                            R.id.copy_download_url -> {
+                                                viewModel.copyDownloadUrl(data)
+                                            }
+                                            else -> {}
                                         }
                                     }
                                     true
@@ -66,18 +82,22 @@ class ActiveFragment : Fragment() {
                             popMenu.show()
                         }
                         else -> {//打开详情
-                            val id = adapter.dataLists[pos].id
-                            val info = viewModel.getInfo(id)
-                            info?.let { info_ ->
-                                getDefaultEventBus()
-                                    .get<SimpleDownloadInfo>(downloadDetailChannelName)
-                                    .post(info_)
-                                startActivity(
-                                    Intent(
-                                        activity,
-                                        DownloadTaskDetailActivity::class.java
-                                    )
-                                )
+                            lifecycleScope.launch {
+                                val id = adapter.dataLists[pos].uuid
+                                    id?.let { it1 ->
+                                        viewModel.getInfo(it1).let{ info_ ->
+                                            getDefaultEventBus()
+                                                .get<SimpleDownloadInfo>(downloadDetailChannelName)
+                                                .post(info_)
+                                            startActivity(
+                                                Intent(
+                                                    activity,
+                                                    DownloadTaskDetailActivity::class.java
+                                                )
+                                            )
+                                        }
+                                    }
+                                
                             }
                         }
                     }
@@ -99,12 +119,17 @@ class ActiveFragment : Fragment() {
     }
 
     private fun observerInfos() {
-        viewModel.getActiveWaitList().observe(this) { newList ->
-            //同时下载最多也就5条数据，数据量小，此处就不开协程处理差异了
+        /*lifecycleScope.launchWhenStarted {
+            viewModel.getMainPageListFromDb().collect{
+
+            }
+        }*/
+
+        viewModel.getMainList().observe(this){ newList->
             val oldList = adapter.dataLists
             val diffResult: DiffUtil.DiffResult =
                 DiffUtil.calculateDiff(Differ(oldList, newList), true)
-            adapter.dataLists = newList
+            adapter.dataLists = newList.toMutableList()
             diffResult.dispatchUpdatesTo(adapter)
         }
     }

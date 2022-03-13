@@ -1,8 +1,5 @@
 package com.kiylx.librarykit.tools.threadpool;
 
-
-import com.crystal.aplayer.module_base.tools.download.DownloadTaskRunnable;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -41,7 +38,7 @@ public class SimpleThreadPool2 {
         }
         return mExecutorService;
     }
-    public void executeTask(DownloadTaskRunnable runnable){
+    public void executeTask(TaskRunnable runnable){
         mExecutorService.execute(runnable);
     }
 
