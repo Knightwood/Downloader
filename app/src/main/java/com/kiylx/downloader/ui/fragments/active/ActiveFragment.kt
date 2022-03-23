@@ -1,7 +1,10 @@
 package com.kiylx.downloader.ui.fragments.active
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +18,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kiylx.download_module.view.SimpleDownloadInfo
 import com.kiylx.downloader.R
 import com.kiylx.downloader.core.download_control.DownloadDelegate.Companion.getDefaultEventBus
+import com.kiylx.downloader.databinding.ActivityAddDownloadBinding
 import com.kiylx.downloader.databinding.FragmentActiveBinding
 import com.kiylx.downloader.kits.ConstRes.Companion.downloadDetailChannelName
 import com.kiylx.downloader.kits.Differ
 import com.kiylx.downloader.ui.activitys.DownloadTaskDetailActivity
 import com.kiylx.downloader.ui.activitys.adddownload.AddDownloadActivity
 import com.kiylx.downloader.ui.fragments.FragmentViewModel
+import com.kiylx.librarykit.tools.LogUtil
 import com.kiylx.librarykit.tools.adapter.MyClickListener
 import com.kiylx.librarykit.toolslib.getViewModel
 import kotlinx.coroutines.flow.collect
@@ -29,6 +34,7 @@ import okhttp3.internal.wait
 import java.util.*
 
 class ActiveFragment : Fragment() {
+    private var activeFragmentBinding: FragmentActiveBinding? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var fab: FloatingActionButton
     private lateinit var viewModel: FragmentViewModel
@@ -43,7 +49,8 @@ class ActiveFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = FragmentActiveBinding.inflate(layoutInflater, container, false)
+        this.activeFragmentBinding= FragmentActiveBinding.inflate(layoutInflater, container, false)
+        val root = activeFragmentBinding!!
         fab = root.floatingActionButton
         recyclerView = root.activeRecyclerview
         recyclerView.adapter = adapter
@@ -84,20 +91,20 @@ class ActiveFragment : Fragment() {
                         else -> {//打开详情
                             lifecycleScope.launch {
                                 val id = adapter.dataLists[pos].uuid
-                                    id?.let { it1 ->
-                                        viewModel.getInfo(it1).let{ info_ ->
-                                            getDefaultEventBus()
-                                                .get<SimpleDownloadInfo>(downloadDetailChannelName)
-                                                .post(info_)
-                                            startActivity(
-                                                Intent(
-                                                    activity,
-                                                    DownloadTaskDetailActivity::class.java
-                                                )
+                                id?.let { it1 ->
+                                    viewModel.getInfo(it1).let { info_ ->
+                                        getDefaultEventBus()
+                                            .get<SimpleDownloadInfo>(downloadDetailChannelName)
+                                            .post(info_)
+                                        startActivity(
+                                            Intent(
+                                                activity,
+                                                DownloadTaskDetailActivity::class.java
                                             )
-                                        }
+                                        )
                                     }
-                                
+                                }
+
                             }
                         }
                     }
@@ -116,6 +123,7 @@ class ActiveFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         observerInfos()
+
     }
 
     private fun observerInfos() {
@@ -125,7 +133,7 @@ class ActiveFragment : Fragment() {
             }
         }*/
 
-        viewModel.getMainList().observe(this){ newList->
+        viewModel.getMainList().observe(this) { newList ->
             val oldList = adapter.dataLists
             val diffResult: DiffUtil.DiffResult =
                 DiffUtil.calculateDiff(Differ(oldList, newList), true)

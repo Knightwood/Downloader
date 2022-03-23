@@ -83,7 +83,7 @@ class FileKitImpl : FileKit<FileDescriptor> {
         TODO("Not yet implemented")
     }
 
-    //必须实现
+    //若实现本类中的getExtension方法，则必须实现此方法
     override fun getName(file: FakeFile<FileDescriptor>): String {
         TODO("Not yet implemented")
     }

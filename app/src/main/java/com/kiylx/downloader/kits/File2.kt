@@ -1,4 +1,4 @@
-package com.kiylx.downloader.core.store
+package com.kiylx.downloader.kits
 
 import android.content.Context
 import android.net.Uri

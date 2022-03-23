@@ -54,7 +54,7 @@ import java.util.UUID;
  * 对于文件的操作
  */
 public class FileSystemFacadeImpl implements FileSystemFacade {
-    @SuppressWarnings("unused")
+    @SuppressWarnings(value = "unused")
     private static final String TAG = FileSystemFacadeImpl.class.getSimpleName();
 
     private static final String EXTENSION_SEPARATOR = ".";
@@ -217,7 +217,7 @@ public class FileSystemFacadeImpl implements FileSystemFacade {
                 long count;
                 while (pos < size) {
                     long remain = size - pos;
-                    count = (remain > FILE_COPY_BUFFER_SIZE ? FILE_COPY_BUFFER_SIZE : remain);
+                    count = (Math.min(remain, FILE_COPY_BUFFER_SIZE));
                     long bytesCopied = output.transferFrom(input, pos, count);
                     if (bytesCopied == 0)
                         break;

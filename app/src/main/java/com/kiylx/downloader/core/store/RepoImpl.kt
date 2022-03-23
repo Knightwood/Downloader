@@ -1,101 +1,99 @@
 package com.kiylx.downloader.core.store
 
+import com.kiylx.download_module.DownloadsListKind.Companion.active_kind
+import com.kiylx.download_module.DownloadsListKind.Companion.finish_kind
+import com.kiylx.download_module.DownloadsListKind.Companion.frozen_kind
+import com.kiylx.download_module.DownloadsListKind.Companion.wait_kind
 import com.kiylx.download_module.lib_core.interfaces.Repo
 import com.kiylx.download_module.lib_core.interfaces.Repo.SyncAction.*
 import com.kiylx.download_module.lib_core.model.DownloadInfo
 import com.kiylx.download_module.lib_core.model.HeaderStore
 import com.kiylx.download_module.lib_core.model.PieceInfo
 import com.kiylx.download_module.view.SimpleDownloadInfo
+import com.kiylx.download_module.view.ViewSources
 import com.kiylx.downloader.core.db.other.DataSources
+import com.kiylx.downloader.core.db.other.convert
 import java.util.*
 
+/**
+ * 此类，用于downloadEngine内部调用。外部不该使用它
+ */
 class RepoImpl : Repo {
-    val db: DataSources = DataSources.dataSources
-    val mainList: MutableList<DownloadInfo> = mutableListOf()
-    val finished: MutableList<DownloadInfo> = mutableListOf()
-
-    val mainMap:MutableMap<UUID,SimpleDownloadInfo> = mutableMapOf()
-    val finishMap:MutableMap<UUID,SimpleDownloadInfo> = mutableMapOf()
+    private val dataSources: DataSources = DataSources.getInstance
+    private val views: ViewSources = dataSources.viewSources
 
     override fun saveInfo(info: DownloadInfo) {
-        db.downloadInfoDao.insertInfo(info.convert())
-        mainList.add(info)
-        updateUI()
-    }
-
-    private fun updateUI() {
-        TODO("Not yet implemented")
+        dataSources.downloadInfoDao.insertInfo(info.convert())
     }
 
     override fun deleteInfo(id: UUID?) {
-        var tmp: DownloadInfo? = null
-        tmp = mainList.find {
-            it.uuid == id
-        }
-        if (tmp == null) {
-            tmp = finished.find {
-                it.uuid == id
-            }
-            if (tmp != null)
-                finished.remove(tmp)
-        } else {
-            mainList.remove(tmp)
-        }
-
+        dataSources.deleteDownloadRecord(id)
     }
 
     override fun queryInfoById(id: UUID?): DownloadInfo {
-        TODO("Not yet implemented")
+        return dataSources.downloadInfoDao.getDownloads(id.toString()).convert()
     }
 
-    override fun queryInfo(info: DownloadInfo?): DownloadInfo {
-        TODO("Not yet implemented")
+    override fun queryInfo(info: DownloadInfo?): DownloadInfo? {
+        return if (info == null)
+            null
+        else
+            queryInfoById(info.uuid)
     }
 
     override fun syncInfoToDisk(info: DownloadInfo, action: Repo.SyncAction) {
-        when(action){
-            ADD ->{
-
-            }
-            UPDATE -> {
-                TODO()
-            }
-
-            DELETE -> {
-                TODO()
-            }
-            MODIFY -> {
-                TODO()
-            }
-            else -> {}
+        when (action) {
+            ADD -> saveInfo(info)
+            UPDATE, UPDATE_STATE -> dataSources.downloadInfoDao.updateInfo(info.convert())
+            DELETE -> deleteInfo(info.uuid)
         }
     }
 
     override fun updateHeader(uuid: UUID, kind: String, value: String) {
-        TODO("Not yet implemented")
+        dataSources.headerInfoDao.updateHeader(uuid, kind, value)
     }
 
     override fun getHeadersById(uuid: UUID, vararg exclude: String?): Array<HeaderStore> {
-        TODO("Not yet implemented")
+        return dataSources.queryHeadersExclude(uuid = uuid.toString(), exclude = exclude)
     }
 
     override fun getHeadersByName(uuid: UUID, vararg include: String?): Array<HeaderStore> {
-        TODO("Not yet implemented")
+        return dataSources.queryHeadersInclude(uuid = uuid.toString(), include = include)
     }
 
     override fun queryPieceInfo(uuid: UUID): MutableList<PieceInfo> {
-        TODO("Not yet implemented")
+        return dataSources.queryPieceInfoById(uuid.toString())
     }
 
     override fun deletePieceInfo(uuid: UUID): Boolean {
-        TODO("Not yet implemented")
+        dataSources.pieceInfoDao.deleteInfo(uuid.toString())
+        return true
     }
 
     override fun syncPieceInfoToDisk(info: PieceInfo, action: Repo.SyncAction) {
-        TODO("Not yet implemented")
+        when (action) {
+            ADD -> dataSources.pieceInfoDao.insert(info)
+            UPDATE, UPDATE_STATE -> dataSources.pieceInfoDao.update(info)
+            DELETE -> dataSources.pieceInfoDao.deleteInfo(info.id.toString())
+        }
     }
 
-    override fun queryList(kind: Int): MutableList<SimpleDownloadInfo> {
-        TODO("Not yet implemented")
+    override fun queryList(kind: Int): List<SimpleDownloadInfo> {
+        when (kind) {
+            wait_kind, frozen_kind -> {
+                return views.mainInfos.filter {
+                    !it.isRunning
+                }
+            }
+            active_kind -> {
+                return views.mainInfos.filter {
+                    it.isRunning
+                }
+            }
+            finish_kind -> {
+                return views.finishInfos
+            }
+        }
+        return emptyList()
     }
 }

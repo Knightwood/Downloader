@@ -1,7 +1,9 @@
-package com.kiylx.downloader.ui.main
+package com.kiylx.downloader.ui.activitys.main
 
+import android.Manifest
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
@@ -12,6 +14,7 @@ import com.kiylx.downloader.ui.fragments.finish.StopFragment
 import com.kiylx.downloader.ui.fragments.setting.SettingsFragment
 import com.kiylx.librarykit.toolslib.nav_tool.BottomNavContainer2
 import com.kiylx.librarykit.toolslib.nav_tool.FragmentFactory
+import com.permissionx.guolindev.PermissionX
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -60,6 +63,28 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager,
             activityBinding.bottomNav, bottomNavSelectListener, null)
         bottomNavContainer.restore(savedInstanceState, supportFragmentManager, fragmentKeys)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        requestAppPermission()
+    }
+
+    private fun requestAppPermission() {
+        PermissionX.init(this)
+            .permissions(Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .explainReasonBeforeRequest()
+            .onExplainRequestReason { scope, deniedList ->
+                scope.showRequestReasonDialog(deniedList, "即将重新申请的权限是程序必须依赖的权限", "我已明白", "取消")
+            }
+            .onForwardToSettings { scope, deniedList ->
+                scope.showForwardToSettingsDialog(deniedList, "你需要给予必要的权限以运行此程序", "我已明白", "取消")
+            }
+            .request { allGranted, grantedList, deniedList ->
+                if (!allGranted) {
+                    Toast.makeText(this, "您拒绝了权限,无法访问网络下载及存储下载文件", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     companion object {

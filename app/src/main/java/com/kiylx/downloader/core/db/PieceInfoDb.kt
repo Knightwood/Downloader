@@ -1,23 +1,42 @@
 package com.kiylx.downloader.core.db
 
-import androidx.room.Dao
-import androidx.room.Database
-import androidx.room.Query
-import androidx.room.RoomDatabase
+import androidx.room.*
+import com.kiylx.download_module.lib_core.model.PieceInfo
+import com.kiylx.downloader.MyApplication
 import com.kiylx.downloader.core.db.other.DownloadBean
-import com.kiylx.downloader.core.db.other.PieceInfo
+import com.kiylx.downloader.core.db.other.PieceBean
 import kotlinx.coroutines.flow.Flow
 
 @Database(entities = [DownloadBean::class], version = 1)
 abstract class PieceInfoDb : RoomDatabase() {
     abstract fun pieceInfoDao(): PieceInfoDao
+
+    companion object {
+        private val pieceDownloadInfoDb = Room.databaseBuilder(
+            MyApplication.myApplication(),
+            PieceInfoDb::class.java,
+            "pieceInfoDatabase"
+        ).build()
+
+        fun dbInstance(): PieceInfoDao {
+            return pieceDownloadInfoDb.pieceInfoDao()
+        }
+    }
 }
 
 @Dao
 interface PieceInfoDao {
-    @Query("SELECT * FROM PieceInfo")
-    fun getAll(): Flow<List<PieceInfo>>
+    @Query("SELECT * FROM PieceBean")
+    fun getAll(): Flow<List<PieceBean>>
 
-    @Query("DELETE FROM PieceInfo WHERE uuid = :uuid")
+    @Query("SELECT * FROM PieceBean WHERE uuid = :uuid")
+    fun queryInfoById(uuid: String): List<PieceBean>
+
+    @Query("DELETE FROM PieceBean WHERE uuid = :uuid")
     fun deleteInfo(uuid: String)
+    @Insert
+    fun insert(info: PieceInfo)
+    @Update
+    fun update(info: PieceInfo)
+
 }

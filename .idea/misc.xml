@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../AndroidStudioProjects/Downloader/app/src/main/res/layout/activity_add_download.xml" value="0.34427083333333336" />
+        <entry key="../../../AndroidStudioProjects/Downloader/app/src/main/res/layout/fragment_active.xml" value="0.34427083333333336" />
+        <entry key="../../../AndroidStudioProjects/Downloader/librarykit/src/main/res/layout/activity_file_manager.xml" value="0.34427083333333336" />
+        <entry key="../../../AndroidStudioProjects/Downloader/librarykit/src/main/res/layout/activity_filemanager_dialog.xml" value="0.20878623188405798" />
+        <entry key="../../../AndroidStudioProjects/Downloader/librarykit/src/main/res/layout/base_recyclerview.xml" value="0.275" />
+        <entry key="../../../AndroidStudioProjects/Downloader/librarykit/src/main/res/layout/dialog_file_manager.xml" value="0.33" />
+        <entry key="../../../AndroidStudioProjects/Downloader/librarykit/src/main/res/layout/dialog_select_dir.xml" value="0.34427083333333336" />
+        <entry key="../../../AndroidStudioProjects/Downloader/librarykit/src/main/res/layout/file_details.xml" value="0.34427083333333336" />
+        <entry key="../../../AndroidStudioProjects/Downloader/librarykit/src/main/res/layout/file_item.xml" value="0.34427083333333336" />
+        <entry key="../../../AndroidStudioProjects/Downloader/librarykit/src/main/res/layout/item_filemanager.xml" value="0.34427083333333336" />
         <entry key="app/src/main/res/drawable-anydpi/ic_pause.xml" value="0.1705" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1705" />

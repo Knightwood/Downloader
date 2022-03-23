@@ -1,11 +1,13 @@
 package com.kiylx.downloader.ui.activitys.adddownload
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.Preference
 import com.kiylx.download_module.lib_core.interfaces.ConnectionListener
 import com.kiylx.download_module.lib_core.network.TaskDataReceive
 import com.kiylx.downloader.databinding.ActivityAddDownloadBinding

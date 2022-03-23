@@ -106,21 +106,6 @@ data class DownloadBean(
     }
 }
 
-
-@Entity
-data class PieceInfo @JvmOverloads constructor(
-    @ColumnInfo val uuid: String,
-    @ColumnInfo val blockId: Int = 0,
-
-    @ColumnInfo var start: Long = -1,
-    @ColumnInfo var end: Long = -1,
-    @ColumnInfo var curBytes: Long = 0,//当前分块已经下载了多少
-    @ColumnInfo var totalBytes: Long = -1,//此分块的完整大小
-
-    @ColumnInfo var finalCode: Int = StatusCode.STATUS_INIT,
-    @ColumnInfo var msg: String? = null,
-)
-
 fun DownloadBean.genSimpleDownloadInfo(): com.kiylx.download_module.view.SimpleDownloadInfo {
     return com.kiylx.download_module.view.SimpleDownloadInfo(
         uuid = uuid,
@@ -175,7 +160,7 @@ fun DownloadInfo.convert(): DownloadBean {
 }
 
 fun DownloadBean.convert(): DownloadInfo {
-    val bean :DownloadBean= this
+    val bean: DownloadBean = this
     val info = DownloadInfo(
         url,
         fileFolder,
@@ -199,7 +184,7 @@ fun DownloadBean.convert(): DownloadInfo {
         this.isPartialSupport = bean.isPartialSupport
         this.threadCounts = bean.threadCounts
         this.blockSize = bean.blockSize
-        this.splitStart =bean.splitStart
+        this.splitStart = bean.splitStart
         this.splitEnd = bean.splitEnd
         this.currentBytes = arrayOf(bean.currentBytes)
         this.speed = bean.speed
@@ -208,4 +193,47 @@ fun DownloadBean.convert(): DownloadInfo {
     }
 
     return info
+}
+
+
+@Entity
+data class PieceBean @JvmOverloads constructor(
+    @ColumnInfo val uuid: String,
+    @ColumnInfo val blockId: Int = 0,
+
+    @ColumnInfo var start: Long = -1,
+    @ColumnInfo var end: Long = -1,
+    @ColumnInfo var curBytes: Long = 0,//当前分块已经下载了多少
+    @ColumnInfo var totalBytes: Long = -1,//此分块的完整大小
+
+    @ColumnInfo var finalCode: Int = StatusCode.STATUS_INIT,
+    @ColumnInfo var msg: String? = null,
+)
+
+fun PieceBean.convert(): PieceInfo {
+    return PieceInfo(
+        UUID.fromString(uuid), blockId, start, end, curBytes, totalBytes, finalCode, msg
+    )
+}
+
+fun PieceInfo.convert(): PieceBean {
+    return PieceBean(
+        id.toString(), blockId, start, end, curBytes, totalBytes, finalCode, msg
+    )
+}
+
+//Header
+@Entity
+data class HeaderBean(
+    @PrimaryKey val infoUUID: UUID,
+    @ColumnInfo val headerName: String,
+    @ColumnInfo var headerValue: String
+)
+
+fun HeaderBean.convert(): HeaderStore {
+    return HeaderStore(infoUUID, headerName, headerValue)
+}
+
+fun HeaderStore.convert(): HeaderBean {
+    return HeaderBean(infoId, name, value)
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/select_folder_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".store.fileindexview.FileManagerActivity">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/folder_path"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="start"
+        android:singleLine="true"
+        android:textAppearance="@style/Widget.MaterialComponents.TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="这里是当前的路径" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/index_view_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/folder_path"
+        app:layout_constraintStart_toStartOf="@id/folder_path"
+        app:layout_constraintTop_toBottomOf="@id/folder_path" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/back_folder"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/backFolder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:Text="@string/backFolder" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/new_folder"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/enter"
+        app:layout_constraintBottom_toTopOf="@id/save_folder"
+        app:layout_constraintEnd_toEndOf="@id/save_folder"
+        app:layout_constraintStart_toStartOf="@id/save_folder"
+        tools:Text="@string/enter" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_folder"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/enter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:Text="@string/enter" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
